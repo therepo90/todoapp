@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FacebookAuth from './FacebookAuth';
+import TodoList from './TodoList';
 
 class App extends Component {
 
@@ -19,14 +20,14 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <FacebookAuth onLoad={this.onFBLoad} appId="153663195313957" onStatusChange={this.onStatusChange} />
-        {this.state.fbLoaded && this.state.loggedIn && (
-          <div>
-            Visible after login
-          </div>
-        )}
-      </div>
+      <MuiThemeProvider>
+        <div>
+          <FacebookAuth onLoad={this.onFBLoad} appId="153663195313957" onStatusChange={this.onStatusChange} />
+          {this.state.fbLoaded && this.state.loggedIn && (
+            <TodoList />
+          )}
+        </div>
+      </MuiThemeProvider>
     );
   }
 }

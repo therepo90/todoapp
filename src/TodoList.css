@@ -1,0 +1,9 @@
+.todolist-task {
+    margin-top: 10px;
+    width: 250px;
+    border: 1px solid black;
+}
+
+.todolist-task__desc {
+    margin-top: 20px;
+}
