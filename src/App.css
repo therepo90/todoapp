@@ -1,0 +1,21 @@
+.app{
+    width: 500px;
+    border: 1px solid black;
+    background-color: rgb(248, 248, 248);
+}
+
+.app__header {
+    text-align: center;
+}
+
+.app__login {
+    display:flex;
+}
+
+.app__fb-button{
+    margin-left: auto;
+}
+
+.app__not-logged {
+    text-align: center;
+}

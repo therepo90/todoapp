@@ -1,9 +1,16 @@
 .todolist-task {
-    margin-top: 10px;
     width: 250px;
     border: 1px solid black;
+    margin-left: auto;
+    padding: 10px;
 }
 
-.todolist-task__desc {
-    margin-top: 20px;
+.todolist-task-container {
+    display:flex;
+    padding: 10px;
+    font-size: 10px;
+}
+
+.todolist-list {
+    border:1px solid black;
 }
