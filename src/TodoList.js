@@ -1,10 +1,10 @@
 import React from 'react';
 import moment from 'moment';
-import { reject } from 'lodash';
+import { reject, isEmpty } from 'lodash';
 import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
 import TextField from 'material-ui/TextField';
-import {List, ListItem} from 'material-ui/List';
+import { APP_ID } from './constants';
 import './TodoList.css';
 
 export default class TodoList extends React.Component {
@@ -17,7 +17,7 @@ export default class TodoList extends React.Component {
     }
     constructor(props){
         super(props);
-        this.TASKS_KEY = 'hsbc::tasks';
+        this.TASKS_KEY = 'todoapp::tasks';
     }
     componentDidMount(){
         this.setState({tasks: this.fetchTasks()});
@@ -59,7 +59,11 @@ export default class TodoList extends React.Component {
     }
 
     onShare =  task => () => {
-        console.log('TODO: This should share to FB using window.FB api');
+        window.FB.ui({
+            app_id: APP_ID,
+            method: 'feed',
+            link: 'http://www.google.com', /* It should be a link to this task */
+        });
     };
 
     onDelete =  task => () => {
@@ -72,18 +76,19 @@ export default class TodoList extends React.Component {
     render() {
         return (
             <div>
-                <h2>TODO list:</h2>
+                {!isEmpty(this.state.tasks) && <h2>TODO list:</h2> }
                 <div className="todolist-list">
-                    <List>
                         {this.state.tasks.map ((task, i) => (
-                            <ListItem
-                             primaryText={`${moment(task.date).format('MMM Do')} - ${task.desc}`} 
-                             key={i} 
-                             leftIcon={<RaisedButton label="X" secondary onClick={this.onDelete(task)} />}
-                             rightIcon={<RaisedButton label="Share" primary onClick={this.onShare(task)} />}
-                             />
+                            <div key={i} className="todolist-list__element">
+                                <div>
+                                    <RaisedButton label="X" secondary onClick={this.onDelete(task)} />
+                                    <span className="todolist-list__title">{`${moment(task.date).format('MMM Do')} - ${task.desc}`} </span>
+                                </div>                                
+                                <div>
+                                    <RaisedButton label="Share" primary onClick={this.onShare(task)} />
+                                </div>
+                            </div>
                         ))}
-                    </List>
                 </div>
                 <div className="todolist-task-container">
                     <form className="todolist-task">

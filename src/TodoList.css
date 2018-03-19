@@ -12,5 +12,20 @@
 }
 
 .todolist-list {
-    border:1px solid black;
+    display: block;
+}
+
+.todolist-list__title {
+    padding: 0 12px;
+}
+
+.todolist-list__element {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 8px;
+    cursor: pointer;
+}
+
+.todolist-list__element:hover {
+    background-color: rgb(205, 217, 228);
 }
